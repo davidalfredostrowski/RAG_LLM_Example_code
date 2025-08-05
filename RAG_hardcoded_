@@ -1,0 +1,46 @@
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+DOCUMENT = """
+OpenAI develops powerful language models such as ChatGPT. These models are used for writing, translation, summarization, and question answering.
+The company also focuses on safety research, reinforcement learning, and scalable AI infrastructure.
+"""
+
+QUERY = "What does OpenAI focus on?"
+
+QUERY = "What does OpenAI focus on?"
+QUERY = "What does OpenAI focus on?"
+
+# === Step 1: Manual chunking ===
+def chunk_text(text, chunk_size=40):
+    words = text.split()
+    return [" ".join(words[i:i + chunk_size]) for i in range(0, len(words), chunk_size)]
+
+chunks = chunk_text(DOCUMENT)
+chunk_embeddings = [
+    np.array([0.1, 0.2, 0.2, 0.3, 0.0, 0.1, 0.3, 0.1, 0.2, 0.1]),  # Chunk 0 (ChatGPT stuff)
+    np.array([0.3, 0.4, 0.1, 0.1, 0.0, 0.0, 0.5, 0.2, 0.1, 0.1]),  # Chunk 1 (focus areas)
+]
+
+query_embedding = np.array([0.4, 0.3, 0.1, 0.1, 0.0, 0.0, 0.5, 0.1, 0.1, 0.1])  # Emphasizes "focus areas"
+# === Step 3: Calculate similarity ===
+similarities = [cosine_similarity([query_embedding], [chunk_emb])[0][0] for chunk_emb in chunk_embeddings]
+display(similarities)
+similarities = [
+    cosine_similarity([query_embedding], [chunk])[0][0]
+    for chunk in chunk_embeddings
+]
+
+
+
+best_idx = int(np.argmax(similarities))
+print(best_idx) 
+best_chunk = chunks[0]
+
+
+
+print("similarities", similarities)
+                
+
+
+                
