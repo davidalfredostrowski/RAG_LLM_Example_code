@@ -28,7 +28,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 OLLAMA_URL = "http://localhost:11434"
-MODEL = "TinyLlama-1.1B-Chat-v1.0"   # "deepseek-r1:1.5b"  # or "tinyllama"
+MODEL =  "deepseek-r1:1.5b"  # or "tinyllama""       TinyLlama-1.1B-Chat-v1.0"   #
 
 DOCUMENT = """
 OpenAI develops advanced AI models like ChatGPT. These tools are used for writing, coding, translation, and summarization.
